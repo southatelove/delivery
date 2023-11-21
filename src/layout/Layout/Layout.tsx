@@ -10,7 +10,7 @@ export function Layout() {
       <div className={styles["sidebar"]}>
         <div className={styles["user"]}>
           <img src="/avatar.png" alt="avatar"></img>
-          <div className={styles["name"]}>хателов</div>
+          <div className={styles["name"]}>Sout ХатеЛов</div>
           <div className={styles["email"]}>artem.jlez@gmail.com</div>
         </div>
         <div className={styles["menu"]}>
