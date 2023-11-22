@@ -7,6 +7,9 @@ import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { PREFIX } from "../../helpers/API";
 import { LoginResponse } from "../../interfaces/auth.interface";
+import { AppDispatch } from "../../components/store/store";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../components/store/user.slice";
 
 export interface LoginForm {
   email: {
@@ -22,6 +25,8 @@ export function Login() {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
@@ -35,8 +40,8 @@ export function Login() {
         email,
         password,
       });
-      console.log(data);
-      localStorage.setItem("jwt", JSON.stringify(data));
+      dispatch(userActions.addJwt(JSON.stringify(data)));
+
       navigate("/");
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -70,7 +75,7 @@ export function Login() {
         </form>
         <div className={styles["links"]}>
           <div>Нет аккаунта?</div>
-          <Link to="/register"> Зарегистрироваться</Link>
+          <Link to="register"> Зарегистрироваться</Link>
         </div>
       </div>
     </>
